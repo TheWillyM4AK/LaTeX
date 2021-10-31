@@ -32,12 +32,64 @@ urlcolor=blue,                          %link por defecto en rojo, cambio a azul
 citecolor=blue
 ]{hyperref}
 
+\usepackage[                            %Paquete para la bibliografía
+backend=biber,                          %Compilador siempre bibar mas nuevo
+style=numeric,                          %Estilo bibliografía
+sorting=nyt                             %Orden
+]{biblatex}
+\usepackage{csquotes}                   %Para que no salte el warning, biblatex + babel
+
+\usepackage[                            %Paquete para los acrónimos
+acronym,
+nonumberlist,                           %Sin contar las veces que salen
+toc                                     %Salir en el índice
+]{glossaries}
+
+\usepackage{float}						%Paquete de flotantes para poner las figuras donde quiero
+\usepackage{multirow}					%Paquete para juntar varias filas en las tablas
+\usepackage[tableposition=top]{caption}	%Paquete para pones los títulos de las tablas arriba
+
+\usepackage{fancyhdr}					%Paquete para encabezados y pie de página
+\usepackage{lastpage}                   %Paquete poner en el pie la ultima pagina
+\usepackage{titlesec}					%Paquete para poner section y subsectons al principio de la página
+\usepackage{amsmath}					%Paquete matemático para poner letras griegas en negrita 
+\usepackage{pdfpages}					%Paquete que me ha dado Sugon para meter la portada
+\usepackage{afterpage}					%Paquete que me ha dado Sugon para meter la portada
+
  
 \renewcommand{\baselinestretch}{1}		%Factor del interlineado
 \setlength{\parskip}{\baselineskip}		%Tamaño de separación entre parrafos relativo al interlineado
 \setlength{\parindent}{0cm}				%Indentación de parrafos a 0
 \setcounter{secnumdepth}{3}				%Se numera hasta las subsecciones
 \setcounter{tocdepth}{3}       			%Índice tiene encuenta hasta las subsubsecciones
+
+%\newcommand{\sectionbreak}{\clearpage}	%Section en página nueva
+
+
+\addbibresource{bibliografia.bib}		%Archivo .bib de donde coge la bibliografía
+
+%Bloque de fancy para frontmatter distinto al mainmatter
+\pagestyle{fancy}						%Defino mi estilo con el paquete fancy
+\fancyhf{}								%Borro todo lo que viene por defecto, lo dejo limpio
+%Encabezado con los logos
+\fancyhead[R]{\includegraphics[height=2cm]{Logos/Logo_SATAA.png}}
+\fancyhead[L]{\includegraphics[height=2cm]{Logos/Logo_UPM.png}}
+%Pie de página
+\fancyfoot[L]{Provisional}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{1pt}      % Grosor linea encabezado
+\renewcommand{\footrulewidth}{1pt}      % Grosor linea pie
+%Bloque de fancy para páginas de capítulo
+\fancypagestyle{plain}{					%Para cambiar las páginas de capítulo
+	\fancyhf{}							%limpio
+	\fancyfoot[L]{Provisional}
+    \fancyfoot[R]{\thepage}
+	\renewcommand{\headrulewidth}{0pt}	%Quito la linea de arriba en los capitulos	
+}
+
+\makeglossaries
+\newacronym{indicativo}{SIGLAS}{Nombre de las Siglas}
+\glsaddall
 
 \begin{document}
 
@@ -71,13 +123,28 @@ citecolor=blue
 	\addcontentsline{toc}{chapter}{\listtablename}\listoftables
 }
 
+\printglossary[type=\acronymtype,title=Acrónimos,toctitle=Acrónimos]
+
+%Bloque de fancy para el resto del documento
+\pagestyle{fancy}						%Defino mi estilo con el paquete fancy
+\fancyhf{}								%Borro todo lo que viene por defecto, lo dejo limpio
+%Encabezado con los logos
+\fancyhead[R]{\includegraphics[height=2cm]{Logos/Logo_SATAA.png}}
+\fancyhead[L]{\includegraphics[height=2cm]{Logos/Logo_UPM.png}}
+%Pie de página
+\fancyfoot[L]{Provisional}
+\fancyfoot[R]{\thepage/{\hypersetup{linkcolor=black}\pageref{LastPage}}}
+\renewcommand{\headrulewidth}{1pt}      % Grosor linea encabezado
+\renewcommand{\footrulewidth}{1pt}      % Grosor linea pie
+
 \mainmatter
 
-\include{}
-\include{}
-\include{}
-\include{}
+\include{1_Capitulo}
+Cuerpo del documento
 
 \backmatter
+
+\nocite{*}	%Para que cite todo del .bib aunque no esté citado en el documento, HAY QUE PONERLO AL FINAL PORQUE METE TODAS LAS ENTRADAS DEL .BIB DE GOLPE Y ROMPE EL ORDEN. LAS FUENTES DEJAN DE ESTAR ORDENADAS POR ORDEN DE APARICIÓN, DEBE IR LO ÚLTIMO.
+\printbibliography[heading=bibintoc,title={Bibliografía}]
 
 \end{document}
