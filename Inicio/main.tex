@@ -1,0 +1,83 @@
+\documentclass[                         %Clase de documento
+12pt,                                   %Tamaño Letra/a4/
+a4paper,                                %a4
+oneside                                 %Páginas iguales
+]{book}		                            %Libro
+
+\usepackage[spanish,es-tabla]{babel}	%Paquete idioma, nombre para que a las tablas las llame tablas
+\decimalpoint                           %Punto en vez de coma
+\usepackage{bold-extra}                 %Para que no salte warning de fuentes por babel
+\usepackage[utf8]{inputenc}				%Paquete para cambio de input (tildes)
+
+\usepackage{graphicx}					%Paquete para poner imágenes y graficas en formato EPS
+\usepackage{parskip}					%Paquete de gestion de parrafos
+
+\usepackage{geometry}                   %Paquete para fijar los márgenes
+\geometry{
+a4paper,
+left=2.5cm,
+top=1cm,
+right=2.5cm,
+bottom=2cm,
+headheight=2.5cm,
+headsep=1cm,
+foot=1cm,
+footskip=1cm,
+includeheadfoot
+}
+
+\usepackage[                            %Paquete para crear los hipervínculos
+colorlinks=true,                        %activo colores en vez de cajas
+urlcolor=blue,                          %link por defecto en rojo, cambio a azul url y citas
+citecolor=blue
+]{hyperref}
+
+ 
+\renewcommand{\baselinestretch}{1}		%Factor del interlineado
+\setlength{\parskip}{\baselineskip}		%Tamaño de separación entre parrafos relativo al interlineado
+\setlength{\parindent}{0cm}				%Indentación de parrafos a 0
+\setcounter{secnumdepth}{3}				%Se numera hasta las subsecciones
+\setcounter{tocdepth}{3}       			%Índice tiene encuenta hasta las subsubsecciones
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+{\includegraphics[width=0.5\textwidth]{Logos/UPM}\par}
+\vspace{0.1cm}
+{\bfseries\LARGE Universidad Politécnica de Madrid \par}
+\vspace{0.5cm}
+{\scshape\large ESCUELA TÉCNICA SUPERIOR DE INGENIERÍA AERONÁUTICA Y DEL ESPACIO \par}
+\vspace{0.25cm}
+{\includegraphics[width=0.38\textwidth]{Logos/ETSIAE} \par}
+\vspace{1cm}
+{\scshape\Large Titulo \par}
+\vspace{0.7cm}
+{\itshape\large Asignatura \par}
+\vfill
+{\Large Autores: \par}
+{\large Apellidos, Nombre \\ Apellidos, Nombre \\ Apellidos, Nombre \\ Apellidos, Nombre \par}
+\vfill
+{\Large día de mes de año \par}
+\end{titlepage}
+
+\frontmatter							%Todo lo contenido en frontmatter se numera en romano							
+%Índice para que salga el resto de índices
+{\hypersetup{linkcolor=black}	    	%Cambio el color de los link a negro
+	\tableofcontents
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listfigurename}\listoffigures
+	\cleardoublepage
+	\addcontentsline{toc}{chapter}{\listtablename}\listoftables
+}
+
+\mainmatter
+
+\include{}
+\include{}
+\include{}
+\include{}
+
+\backmatter
+
+\end{document}
