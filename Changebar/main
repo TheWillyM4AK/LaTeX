@@ -1,0 +1,6 @@
+\usepackage[color]{changebar}			%Marca cambios con lineas
+
+%Diseño de changebar
+\setlength\changebarsep{10pt}
+\cbcolor{red}
+\setlength\changebarwidth{2pt}
